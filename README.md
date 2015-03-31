@@ -20,6 +20,7 @@ creates a new GoodFile object with the following arguments
 - `[options]` -
 	- `format` - [MomentJS](http://momentjs.com/docs/#/displaying/format/) format string. Defaults to 'YYMMDD/HHmmss.SSS'.
 	- `utc` - boolean controlling Moment using [utc mode](http://momentjs.com/docs/#/parsing/utc/) or not. Defaults to `true`.
+	- `json` - output logs in JSON format. Defaults to `false`.
 
 ### Output Formats
 
