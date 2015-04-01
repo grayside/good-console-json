@@ -5,7 +5,7 @@ var Code = require('code');
 var Hoek = require('hoek');
 var Lab = require('lab');
 var Moment = require('moment');
-var GoodConsole = require('..');
+var GoodConsoleJson = require('..');
 
 
 // Declare internals
@@ -71,7 +71,7 @@ var after = lab.after;
 var describe = lab.describe;
 var it = lab.it;
 
-describe('GoodConsole', function () {
+describe('GoodConsoleJson', function () {
 
     var log;
 
@@ -91,7 +91,7 @@ describe('GoodConsole', function () {
 
         expect(function () {
 
-            var reporter = GoodConsole();
+            var reporter = GoodConsoleJson();
         }).to.throw('GoodConsole must be created with new');
         done();
     });
@@ -102,7 +102,7 @@ describe('GoodConsole', function () {
 
             it('logs to the console for "response" events', function (done) {
 
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var ee = new EventEmitter();
@@ -125,7 +125,7 @@ describe('GoodConsole', function () {
 
             it('logs to the console for "response" events without a query', function (done) {
 
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var event = Hoek.clone(internals.response);
@@ -150,7 +150,7 @@ describe('GoodConsole', function () {
 
             it('logs to the console for "response" events without a responsePayload', function (done) {
 
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var event = Hoek.clone(internals.response);
@@ -175,7 +175,7 @@ describe('GoodConsole', function () {
 
             it('provides a default color for response methods', function (done) {
 
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var event = Hoek.clone(internals.response);
@@ -199,7 +199,7 @@ describe('GoodConsole', function () {
 
             it('does not log a status code if there is not one attached', function (done) {
 
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var event = Hoek.clone(internals.response);
@@ -225,7 +225,7 @@ describe('GoodConsole', function () {
             it('uses different colors for different status codes', function (done) {
 
                 var counter = 1;
-                var reporter = new GoodConsole({ response: '*' });
+                var reporter = new GoodConsoleJson({ response: '*' });
                 var now = Date.now();
                 var timeString = Moment.utc(now).format(internals.defaults.format);
                 var colors = {
@@ -267,7 +267,7 @@ describe('GoodConsole', function () {
 
         it('prints ops events', function (done) {
 
-            var reporter = new GoodConsole({ ops: '*' });
+            var reporter = new GoodConsoleJson({ ops: '*' });
             var now = Date.now();
             var timeString = Moment.utc(now).format(internals.defaults.format);
             var event = Hoek.clone(internals.ops);
@@ -290,7 +290,7 @@ describe('GoodConsole', function () {
 
         it('prints error events', function (done) {
 
-            var reporter = new GoodConsole({ error: '*' });
+            var reporter = new GoodConsoleJson({ error: '*' });
             var now = Date.now();
             var timeString = Moment.utc(now).format(internals.defaults.format);
             var event = {
@@ -319,7 +319,7 @@ describe('GoodConsole', function () {
 
         it('prints request events with string data', function (done) {
 
-            var reporter = new GoodConsole({ request: '*' });
+            var reporter = new GoodConsoleJson({ request: '*' });
             var now = Date.now();
             var timeString = Moment.utc(now).format(internals.defaults.format);
             var ee = new EventEmitter();
@@ -341,7 +341,7 @@ describe('GoodConsole', function () {
 
         it('prints request events with object data', function (done) {
 
-            var reporter = new GoodConsole({ request: '*' });
+            var reporter = new GoodConsoleJson({ request: '*' });
             var now = Date.now();
             var timeString = Moment.utc(now).format(internals.defaults.format);
             var ee = new EventEmitter();
@@ -364,7 +364,7 @@ describe('GoodConsole', function () {
 
         it('prints a warning message for unknown event types', function (done) {
 
-            var reporter = new GoodConsole({ test: '*' });
+            var reporter = new GoodConsoleJson({ test: '*' });
             var event = {
                 event: 'test',
                 data: {
@@ -389,7 +389,7 @@ describe('GoodConsole', function () {
 
         it('prints log events with string data', function (done) {
 
-            var reporter = new GoodConsole({ log: '*' }, { format: 'DD-YY -- ZZ', utc: false });
+            var reporter = new GoodConsoleJson({ log: '*' }, { format: 'DD-YY -- ZZ', utc: false });
             var now = Date.now();
             var timeString = Moment(now).format('DD-YY -- ZZ');
             var ee = new EventEmitter();
@@ -415,7 +415,7 @@ describe('GoodConsole', function () {
 
         it('prints log events with object data', function (done) {
 
-            var reporter = new GoodConsole({ log: '*' });
+            var reporter = new GoodConsoleJson({ log: '*' });
             var now = Date.now();
             var timeString = Moment.utc(now).format(internals.defaults.format);
             var ee = new EventEmitter();
@@ -443,7 +443,7 @@ describe('GoodConsole', function () {
 
         it('formats the timestamp based on the supplied option', function (done) {
 
-            var reporter = new GoodConsole({ test: '*' }, { format: 'YYYY'});
+            var reporter = new GoodConsoleJson({ test: '*' }, { format: 'YYYY'});
             var now = Date.now();
             var timeString = Moment.utc(now).format('YYYY');
             var event = {
@@ -473,7 +473,7 @@ describe('GoodConsole', function () {
 
         it('formats the timestamp based on the supplied option non-utc mode', function (done) {
 
-            var reporter = new GoodConsole({ test: '*' }, { format: 'YYYY - ZZ', utc: false });
+            var reporter = new GoodConsoleJson({ test: '*' }, { format: 'YYYY - ZZ', utc: false });
             var now = Date.now();
             var timeString = Moment(now).format('YYYY - ZZ');
             var event = {
